@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.service;
 
+import br.com.devlucas.tarefas.dto.ListaPessoasEMediaDeHorasDTO;
 import br.com.devlucas.tarefas.dto.ListagemPessoaDTO;
 import br.com.devlucas.tarefas.dto.PessoaDTO;
 import br.com.devlucas.tarefas.dto.mapper.PessoaMapper;
@@ -22,6 +23,10 @@ public class PessoaService {
 
     public List<ListagemPessoaDTO> listarPessoas(){
         return pessoaRepository.findAll().stream().map(ListagemPessoaDTO::new).toList();
+    }
+
+    public List<ListaPessoasEMediaDeHorasDTO> listarPessoasEMediaDeHorasGastaPorTarefa(){
+        return pessoaRepository.findAll().stream().map(ListaPessoasEMediaDeHorasDTO::new).toList();
     }
 
     public PessoaDTO create(@Valid PessoaDTO pessoaDTO){

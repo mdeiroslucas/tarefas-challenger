@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.controller;
 
+import br.com.devlucas.tarefas.dto.ListaPessoasEMediaDeHorasDTO;
 import br.com.devlucas.tarefas.dto.ListagemPessoaDTO;
 import br.com.devlucas.tarefas.dto.PessoaDTO;
 import br.com.devlucas.tarefas.model.Pessoa;
@@ -27,6 +28,13 @@ public class PessoasController {
         return pessoaService.listarPessoas();
     }
 
+
+
+    @GetMapping("/gastos")
+    public List<ListaPessoasEMediaDeHorasDTO> listarPessoasEMediaDeHorasGastaPorTarefa() {
+        return pessoaService.listarPessoasEMediaDeHorasGastaPorTarefa();
+    }
+
     @PostMapping
     public ResponseEntity<PessoaDTO> create(@RequestBody PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder){
         System.out.println(pessoaDTO);
@@ -36,4 +44,6 @@ public class PessoasController {
 //
 //        return ResponseEntity.created(uri).body(pessoa);
     }
+
+
 }
