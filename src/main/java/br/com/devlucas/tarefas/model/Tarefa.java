@@ -26,7 +26,7 @@ public class Tarefa {
     private LocalDate prazo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idDepartamento")
+    @JoinColumn(name = "idDepartamento", nullable = false)
     @NotNull(message = "Departamento da tarefa não pode ser vazio!")
     private Departamento departamento;
 

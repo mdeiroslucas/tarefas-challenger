@@ -20,8 +20,8 @@ public class Pessoa {
     @JoinColumn(name = "idDepartamento")
     private Departamento departamento;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    private List<Tarefa> tarefas = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa")
+    private List<Tarefa> tarefas = new ArrayList<>();
 
     public Pessoa() {
     }
@@ -61,5 +61,13 @@ public class Pessoa {
 
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
+    }
+
+    public List<Tarefa> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<Tarefa> tarefas) {
+        this.tarefas = tarefas;
     }
 }

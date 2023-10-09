@@ -55,7 +55,10 @@ public class TarefasApplication {
 			t.setPessoa(pessoa);
 			t.setPrazo(LocalDate.parse("20/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
+			Tarefa t2 = new Tarefa(null, "Correção 2", "Calculando tarefas", LocalDate.parse("22/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamento, 5, pessoa, false);
+
 			tarefaRepository.save(t);
+			tarefaRepository.save(t2);
 
 		};
 	}
