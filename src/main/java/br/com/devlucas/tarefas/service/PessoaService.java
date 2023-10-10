@@ -47,4 +47,8 @@ public class PessoaService {
                     return pessoaMapper.toDTO(pessoaRepository.save(pessoaUpdate));
                 }).orElseThrow(() -> new RegistroNaoEncontrado(id));
     }
+
+    public void delete (@NotNull @Positive Long id){
+        pessoaRepository.delete(pessoaRepository.findById(id).orElseThrow(() -> new RegistroNaoEncontrado(id)));
+    }
 }

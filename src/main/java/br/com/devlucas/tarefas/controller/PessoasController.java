@@ -52,5 +52,12 @@ public class PessoasController {
         return ResponseEntity.ok(pessoaService.update(id, pessoaDTO));
     }
 
+    @Transactional
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable @Positive @NotNull Long id){
+        pessoaService.delete(id);
+    }
+
 
 }
