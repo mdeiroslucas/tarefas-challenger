@@ -1,6 +1,7 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
 import br.com.devlucas.tarefas.dto.PessoaDTO;
+import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.model.Pessoa;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,8 @@ public class PessoaMapper {
         return new PessoaDTO(
                 pessoa.getId(),
                 pessoa.getNome(),
-                pessoa.getDepartamento()
+                pessoa.getDepartamento(),
+                pessoa.getTarefas()
         );
     }
 
@@ -28,8 +30,15 @@ public class PessoaMapper {
             pessoa.setId(pessoaDTO.id());
         }
 
-        pessoa.setNome(pessoaDTO.nome());
-        pessoa.setDepartamento(pessoaDTO.departamento());
+        if (pessoaDTO.tarefas() != null) {
+            pessoa.setTarefas(pessoaDTO.tarefas());
+        }
+
+        var departamento = new Departamento();
+        departamento.setId(pessoaDTO.departamento().getId());
+
+//        pessoa.setNome(pessoaDTO.nome());
+        pessoa.setDepartamento(departamento);
 
         return pessoa;
     }

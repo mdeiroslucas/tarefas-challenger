@@ -25,7 +25,7 @@ public class Tarefa {
     @NotNull(message = "Prazo da tarefa não pode ser vazio!")
     private LocalDate prazo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idDepartamento", nullable = false)
     @NotNull(message = "Departamento da tarefa não pode ser vazio!")
     private Departamento departamento;
@@ -54,6 +54,10 @@ public class Tarefa {
         this.duracao = duracao;
         this.pessoa = pessoa;
         this.finalizado = finalizado;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

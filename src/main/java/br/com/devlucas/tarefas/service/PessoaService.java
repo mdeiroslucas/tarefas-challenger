@@ -6,7 +6,10 @@ import br.com.devlucas.tarefas.dto.PessoaDTO;
 import br.com.devlucas.tarefas.dto.mapper.PessoaMapper;
 import br.com.devlucas.tarefas.model.Pessoa;
 import br.com.devlucas.tarefas.repository.PessoaRepository;
+import br.com.devlucas.tarefas.validacoes.RecordNotFoundException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +33,15 @@ public class PessoaService {
     }
 
     public PessoaDTO create(@Valid PessoaDTO pessoaDTO){
-
         return pessoaMapper.toDTO(pessoaRepository.save(pessoaMapper.toModel(pessoaDTO)));
+    }
+
+    public PessoaDTO update(@NotNull, @Positive Long id, @Valid PessoaDTO pessoaDTO) {
+        return pessoaRepository.findById(id)
+                .map((pessoaUpdate) -> {
+                    pessoaUpdate.setNome(pessoaDTO.nome());
+                    pessoaUpdate.setDepartamento(pessoaDTO.departamento());
+                    pessoaUpdate.setTarefas(pessoaDTO.tarefas());
+                }).orElseThrow(() -> new RecordNotFoundException)
     }
 }

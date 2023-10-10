@@ -16,7 +16,7 @@ public class Pessoa {
 
     private String nome;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "idDepartamento")
     private Departamento departamento;
 

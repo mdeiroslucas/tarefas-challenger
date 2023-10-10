@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,13 +37,12 @@ public class PessoasController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<PessoaDTO> create(@RequestBody PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder){
-        System.out.println(pessoaDTO);
-        return null;
-//        var pessoa =  pessoaService.create(pessoaDTO);
-//        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.id()).toUri();
-//
-//        return ResponseEntity.created(uri).body(pessoa);
+        var pessoa =  pessoaService.create(pessoaDTO);
+        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.id()).toUri();
+
+        return ResponseEntity.created(uri).body(pessoa);
     }
 
 

@@ -29,6 +29,10 @@ public class Departamento {
         this.titulo = titulo;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
@@ -38,6 +42,14 @@ public class Departamento {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    @Override
+    public String toString() {
+        return "Departamento{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                '}';
     }
 
 
