@@ -6,6 +6,10 @@ import br.com.devlucas.tarefas.dto.PessoaDTO;
 import br.com.devlucas.tarefas.model.Pessoa;
 import br.com.devlucas.tarefas.repository.PessoaRepository;
 import br.com.devlucas.tarefas.service.PessoaService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +28,13 @@ public class PessoasController {
     PessoaService pessoaService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<ListagemPessoaDTO> listarPessoas() {
-        return pessoaService.listarPessoas();
+    public ResponseEntity<List<ListagemPessoaDTO>> listarPessoas() {
+        return ResponseEntity.ok(pessoaService.listarPessoas());
     }
 
-
-
     @GetMapping("/gastos")
-    public List<ListaPessoasEMediaDeHorasDTO> listarPessoasEMediaDeHorasGastaPorTarefa() {
-        return pessoaService.listarPessoasEMediaDeHorasGastaPorTarefa();
+    public ResponseEntity<List<ListaPessoasEMediaDeHorasDTO>> listarPessoasEMediaDeHorasGastaPorTarefa() {
+        return ResponseEntity.ok(pessoaService.listarPessoasEMediaDeHorasGastaPorTarefa());
     }
 
     @PostMapping
@@ -43,6 +44,12 @@ public class PessoasController {
         var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.id()).toUri();
 
         return ResponseEntity.created(uri).body(pessoa);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<PessoaDTO> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid PessoaDTO pessoaDTO) {
+        return ResponseEntity.ok(pessoaService.update(id, pessoaDTO));
     }
 
 

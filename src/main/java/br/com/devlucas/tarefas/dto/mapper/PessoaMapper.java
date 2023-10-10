@@ -34,10 +34,11 @@ public class PessoaMapper {
             pessoa.setTarefas(pessoaDTO.tarefas());
         }
 
+        pessoa.setNome(pessoaDTO.nome());
+
         var departamento = new Departamento();
         departamento.setId(pessoaDTO.departamento().getId());
 
-//        pessoa.setNome(pessoaDTO.nome());
         pessoa.setDepartamento(departamento);
 
         return pessoa;
