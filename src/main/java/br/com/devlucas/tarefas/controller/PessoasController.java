@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.controller;
 
+import br.com.devlucas.tarefas.dto.DepartamentoDTO;
 import br.com.devlucas.tarefas.dto.ListaPessoasEMediaDeHorasDTO;
 import br.com.devlucas.tarefas.dto.ListagemPessoaDTO;
 import br.com.devlucas.tarefas.dto.PessoaDTO;
@@ -11,6 +12,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,8 +32,15 @@ public class PessoasController {
     PessoaService pessoaService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ListagemPessoaDTO>> listarPessoas() {
         return ResponseEntity.ok(pessoaService.listarPessoas());
+    }
+
+    @GetMapping("/outras")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<ListagemPessoaDTO> listarPessoasPorNome(@PageableDefault(size = 1) Pageable paginacao) {
+        return pessoaService.listarPessoasPorPaginacao(paginacao);
     }
 
     @GetMapping("/gastos")
@@ -58,6 +69,8 @@ public class PessoasController {
     public void deletar(@PathVariable @Positive @NotNull Long id){
         pessoaService.delete(id);
     }
+
+
 
 
 }

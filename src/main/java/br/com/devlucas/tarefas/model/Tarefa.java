@@ -10,14 +10,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "tarefa")
-@Table(name = "tarefas")
+@Entity(name = "Tarefa")
+@Table(name = "tarefa")
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @NotBlank(message = "Título da tarefa não pode ser vazio!")
+    @NotBlank(message = "Titulo da tarefa não pode ser vazio!")
     private String titulo;
     @NotBlank(message = "Descricao da tarefa não pode ser vazio!")
     private String descricao;
@@ -25,8 +26,8 @@ public class Tarefa {
     @NotNull(message = "Prazo da tarefa não pode ser vazio!")
     private LocalDate prazo;
 
-    @ManyToOne
-    @JoinColumn(name = "idDepartamento", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "idDepartamento", nullable = false)
     @NotNull(message = "Departamento da tarefa não pode ser vazio!")
     private Departamento departamento;
 
@@ -35,15 +36,11 @@ public class Tarefa {
     @Max(value = 365, message = "A duração máxima é 365")
     private Integer duracao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPessoa")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "idPessoa")
     private Pessoa pessoa;
 
     private Boolean finalizado = false;
-
-
-
-    public Tarefa() {}
 
     public Tarefa(Long id, String titulo, String descricao, LocalDate prazo, Departamento departamento, Integer duracao, Pessoa pessoa, Boolean finalizado) {
         this.id = id;
@@ -55,6 +52,8 @@ public class Tarefa {
         this.pessoa = pessoa;
         this.finalizado = finalizado;
     }
+
+    public Tarefa() {}
 
     public void setId(Long id) {
         this.id = id;

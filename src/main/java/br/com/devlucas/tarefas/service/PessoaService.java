@@ -12,10 +12,15 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,9 +34,16 @@ public class PessoaService {
     public List<ListagemPessoaDTO> listarPessoas(){
         return pessoaRepository.findAll().stream().map(ListagemPessoaDTO::new).toList();
     }
+    public Page<ListagemPessoaDTO> listarPessoasPorPaginacao(Pageable paginacao){
+        return pessoaRepository.findAll(paginacao).map(ListagemPessoaDTO::new);
+    }
 
     public List<ListaPessoasEMediaDeHorasDTO> listarPessoasEMediaDeHorasGastaPorTarefa(){
         return pessoaRepository.findAll().stream().map(ListaPessoasEMediaDeHorasDTO::new).toList();
+    }
+
+    public List<ListaPessoasEMediaDeHorasDTO> buscarPessoaPorNome(@PathVariable String nome) {
+        return pessoaRepository.findByNome(nome).stream().map(ListaPessoasEMediaDeHorasDTO::new).toList();
     }
 
     public PessoaDTO create(@Valid PessoaDTO pessoaDTO){
@@ -51,4 +63,8 @@ public class PessoaService {
     public void delete (@NotNull @Positive Long id){
         pessoaRepository.delete(pessoaRepository.findById(id).orElseThrow(() -> new RegistroNaoEncontrado(id)));
     }
+
+//    public List<ListagemPessoaDTO> listaPessoasPorDepartamento(PessoaDTO pessoaDTO) {
+//        return pessoaRepository.countByDepartamento(pessoaDTO.departamento());
+//    }
 }

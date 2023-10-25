@@ -1,10 +1,15 @@
 package br.com.devlucas.tarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "pessoa")
 @Table(name = "pessoas")
@@ -18,9 +23,11 @@ public class Pessoa {
 
     @ManyToOne
     @JoinColumn(name = "idDepartamento")
+    @JsonIgnore
     private Departamento departamento;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
     private List<Tarefa> tarefas = new ArrayList<>();
 
     public Pessoa() {
@@ -69,5 +76,17 @@ public class Pessoa {
 
     public void setTarefas(List<Tarefa> tarefas) {
         this.tarefas = tarefas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pessoa pessoa)) return false;
+        return Objects.equals(getId(), pessoa.getId()) && Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getDepartamento(), pessoa.getDepartamento()) && Objects.equals(getTarefas(), pessoa.getTarefas());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNome(), getDepartamento(), getTarefas());
     }
 }
