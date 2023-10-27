@@ -24,7 +24,7 @@ public class DepartamentoController {
     private DepartamentoService departamentoService;
 
     @GetMapping
-    public ResponseEntity<List<DepartamentoDTO>> listarDepartamentos() {
+    public ResponseEntity<List<Departamento>> listarDepartamentos() {
         return ResponseEntity.ok(departamentoService.listarDepartamentos());
     }
 }

@@ -8,7 +8,7 @@ public record DepartamentoDTO(
         Integer quantidadeTarefas
         ) {
 
-        public DepartamentoDTO (Departamento departamento) {
-                this(departamento.getTitulo(), departamento.getPessoas().size(), departamento.getTarefas().size());
-        }
+//        public DepartamentoDTO (Departamento departamento) {
+//                this(departamento.getTitulo(), departamento.getPessoas().size(), departamento.getTarefas().size());
+//        }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "pessoa")
+@Entity(name = "Pessoa")
 @Table(name = "pessoas")
 public class Pessoa {
 
@@ -22,13 +22,13 @@ public class Pessoa {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "idDepartamento")
+//    @JoinColumn(name = "idDepartamento")
     @JsonIgnore
     private Departamento departamento;
 
     @OneToMany(mappedBy = "pessoa")
     @JsonIgnore
-    private List<Tarefa> tarefas = new ArrayList<>();
+    private List<Tarefa> tarefas;
 
     public Pessoa() {
     }

@@ -2,6 +2,7 @@ package br.com.devlucas.tarefas.service;
 
 import br.com.devlucas.tarefas.dto.TarefaDTO;
 import br.com.devlucas.tarefas.dto.mapper.TarefaMapper;
+import br.com.devlucas.tarefas.model.Tarefa;
 import br.com.devlucas.tarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ public class TarefaService {
     @Autowired
     private TarefaMapper tarefaMapper;
 
-    public Page<TarefaDTO> getTarefasSemPessoas(Pageable paginacao){
-        return tarefaRepository.findByPessoaIsNullOrderByPrazo(paginacao).map(tarefaMapper::toDTO);
+    public Page<Tarefa> getTarefasSemPessoas(Pageable paginacao){
+        return tarefaRepository.findByPessoaIsNullOrderByPrazo(paginacao);
     }
 }

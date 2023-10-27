@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -17,7 +18,6 @@ public class Tarefa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "Título da tarefa não pode ser vazio!")
     @NotBlank(message = "Titulo da tarefa não pode ser vazio!")
     private String titulo;
     @NotBlank(message = "Descricao da tarefa não pode ser vazio!")
@@ -27,7 +27,6 @@ public class Tarefa {
     private LocalDate prazo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idDepartamento", nullable = false)
     @NotNull(message = "Departamento da tarefa não pode ser vazio!")
     private Departamento departamento;
 
@@ -37,7 +36,6 @@ public class Tarefa {
     private Integer duracao;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "idPessoa")
     private Pessoa pessoa;
 
     private Boolean finalizado = false;

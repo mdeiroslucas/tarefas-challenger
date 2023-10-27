@@ -13,10 +13,10 @@ public class DepartamentoMapper {
             return null;
         }
 
-        return new DepartamentoDTO(
-                departamento.getTitulo(),
-                departamento.getPessoas().size(),
-                departamento.getTarefas().size()
-        );
+        return new DepartamentoDTO("teste", 1 ,3);
+//                departamento.getTitulo(),
+//                departamento.getPessoas().size(),
+//                departamento.getTarefas().size()
+//        );
     }
 }

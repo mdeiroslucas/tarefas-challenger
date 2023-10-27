@@ -19,7 +19,7 @@ public class DepartamentoService {
     private DepartamentoMapper departamentoMapper;
 
 
-    public List<DepartamentoDTO> listarDepartamentos() {
-        return departamentoRepository.findAll().stream().map(departamentoMapper::toDTO).toList();
+    public List<Departamento> listarDepartamentos() {
+        return departamentoRepository.findAll().stream().toList();
     }
 }

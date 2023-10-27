@@ -29,7 +29,7 @@ public class TarefaController {
 
     @GetMapping("/pendentes")
     @ResponseStatus(HttpStatus.OK)
-    public Page<TarefaDTO> getTarefasPendentesSemPessoa(@PageableDefault(size = 1)Pageable paginacao) {
+    public Page<Tarefa> getTarefasPendentesSemPessoa(@PageableDefault(size = 1)Pageable paginacao) {
         return tarefaService.getTarefasSemPessoas(paginacao);
     }
 }
