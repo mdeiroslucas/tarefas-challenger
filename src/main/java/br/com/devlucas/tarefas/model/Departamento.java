@@ -14,20 +14,6 @@ public class Departamento {
 
     private String titulo;
 
-//    @OneToMany(mappedBy = "departamento")
-//    private List<Pessoa> pessoas;
-//
-//    @OneToMany(mappedBy = "departamento")
-//    private List<Tarefa> tarefas;
-
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idPessoa")
-//    private List<Pessoa> pessoas;
-
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idTarefa")
-//    private List<Tarefa> tarefas;
-
     public Departamento() {
     }
 

@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
+import br.com.devlucas.tarefas.dto.RetornaListaDeTarefasVazias;
 import br.com.devlucas.tarefas.dto.TarefaDTO;
 import br.com.devlucas.tarefas.model.Tarefa;
 import org.springframework.stereotype.Component;

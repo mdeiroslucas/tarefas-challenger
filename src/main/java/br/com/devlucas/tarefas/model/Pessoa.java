@@ -21,13 +21,10 @@ public class Pessoa {
 
     private String nome;
 
-    @ManyToOne
-//    @JoinColumn(name = "idDepartamento")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private Departamento departamento;
 
     @OneToMany(mappedBy = "pessoa")
-    @JsonIgnore
     private List<Tarefa> tarefas;
 
     public Pessoa() {
