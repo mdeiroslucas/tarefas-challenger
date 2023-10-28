@@ -1,6 +1,6 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
-import br.com.devlucas.tarefas.dto.TarefaDTO;
+import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.model.Pessoa;
 import br.com.devlucas.tarefas.model.Tarefa;

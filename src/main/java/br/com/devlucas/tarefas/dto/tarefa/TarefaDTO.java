@@ -1,14 +1,9 @@
-package br.com.devlucas.tarefas.dto;
+package br.com.devlucas.tarefas.dto.tarefa;
 
 import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.model.Pessoa;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
-
 import java.time.LocalDate;
 
 public record TarefaDTO(

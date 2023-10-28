@@ -1,4 +1,4 @@
-package br.com.devlucas.tarefas.dto;
+package br.com.devlucas.tarefas.dto.pessoa;
 
 import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.model.Tarefa;

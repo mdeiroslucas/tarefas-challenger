@@ -1,12 +1,10 @@
 package br.com.devlucas.tarefas.service;
 
-import br.com.devlucas.tarefas.dto.ListaPessoasEMediaDeHorasDTO;
-import br.com.devlucas.tarefas.dto.ListagemPessoaDTO;
-import br.com.devlucas.tarefas.dto.PessoaDTO;
+import br.com.devlucas.tarefas.dto.pessoa.ListaPessoasEMediaDeHorasDTO;
+import br.com.devlucas.tarefas.dto.pessoa.ListagemPessoaDTO;
+import br.com.devlucas.tarefas.dto.pessoa.PessoaDTO;
 import br.com.devlucas.tarefas.dto.mapper.PessoaMapper;
 import br.com.devlucas.tarefas.infra.exception.RegistroNaoEncontrado;
-import br.com.devlucas.tarefas.infra.exception.ValidacaoException;
-import br.com.devlucas.tarefas.model.Pessoa;
 import br.com.devlucas.tarefas.repository.PessoaRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -14,13 +12,10 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

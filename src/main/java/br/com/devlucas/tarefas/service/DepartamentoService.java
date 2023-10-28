@@ -1,6 +1,5 @@
 package br.com.devlucas.tarefas.service;
 
-import br.com.devlucas.tarefas.dto.DepartamentoDTO;
 import br.com.devlucas.tarefas.dto.mapper.DepartamentoMapper;
 import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.repository.DepartamentoRepository;

@@ -1,9 +1,7 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
-import br.com.devlucas.tarefas.dto.DepartamentoDTO;
-import br.com.devlucas.tarefas.dto.PessoaDTO;
+import br.com.devlucas.tarefas.dto.departamento.DepartamentoDTO;
 import br.com.devlucas.tarefas.model.Departamento;
-import br.com.devlucas.tarefas.model.Pessoa;
 import org.springframework.stereotype.Component;
 
 @Component
