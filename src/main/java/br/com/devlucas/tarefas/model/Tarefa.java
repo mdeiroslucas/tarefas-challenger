@@ -27,8 +27,7 @@ public class Tarefa {
     @NotNull(message = "Prazo da tarefa não pode ser vazio!")
     private LocalDate prazo;
 
-    @ManyToOne
-//            (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull(message = "Departamento da tarefa não pode ser vazio!")
     private Departamento departamento;
 
@@ -37,8 +36,7 @@ public class Tarefa {
     @Max(value = 365, message = "A duração máxima é 365")
     private Integer duracao;
 
-    @ManyToOne
-//            (fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa pessoa;
 
     private Boolean finalizado = false;

@@ -14,5 +14,19 @@ import java.util.List;
 
 @Repository
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
+
+    @Query("""
+    SELECT 
+        t 
+    FROM 
+        Tarefa t
+    JOIN FETCH
+        t.departamento
+    WHERE
+        t.pessoa IS NULL
+    ORDER BY
+        t.prazo
+
+    """)
     Page<Tarefa> findByPessoaIsNullOrderByPrazo(Pageable paginacao);
 }

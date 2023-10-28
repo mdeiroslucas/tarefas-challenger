@@ -10,10 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -29,7 +28,13 @@ public class TarefaController {
 
     @GetMapping("/pendentes")
     @ResponseStatus(HttpStatus.OK)
-    public Page<Tarefa> getTarefasPendentesSemPessoa(@PageableDefault(size = 3)Pageable paginacao) {
+    public Page<TarefaDTO> getTarefasPendentesSemPessoa(Pageable paginacao) {
         return tarefaService.getTarefasSemPessoas(paginacao);
     }
+
+//    @PutMapping("/finalizar/{id}")
+//    @Transactional
+//    public ResponseEntity<TarefaDTO> finalizaTarefa(@PathVariable Long id) {
+//        return ResponseEntity.ok(tarefaService.finalizaTarefa(TarefaDTO));
+//    }
 }
