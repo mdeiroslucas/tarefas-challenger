@@ -1,8 +1,11 @@
 package br.com.devlucas.tarefas.controller;
 
+import br.com.devlucas.tarefas.dto.tarefa.AlocaPessoaTarefaDTO;
+import br.com.devlucas.tarefas.dto.tarefa.TarefaConcluidaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.dto.mapper.TarefaMapper;
 import br.com.devlucas.tarefas.service.TarefaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +32,13 @@ public class TarefaController {
 
     @PutMapping("/finalizar/{id}")
     @Transactional
-    public ResponseEntity<TarefaDTO> finalizarTarefa(@PathVariable Long id) {
+    public ResponseEntity<TarefaConcluidaDTO> finalizarTarefa(@PathVariable Long id) {
         return ResponseEntity.ok(tarefaService.finalizarTarefa(id));
+    }
+
+    @PutMapping("/alocar/{id}")
+    @Transactional
+    public ResponseEntity<AlocaPessoaTarefaDTO> alocarPessoaNaTarefa(@PathVariable Long id, @Valid @RequestBody AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
+        return ResponseEntity.ok(tarefaService.alocaPessoaNaTarefa(id, alocaPessoaTarefaDTO));
     }
 }

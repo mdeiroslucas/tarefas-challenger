@@ -1,5 +1,7 @@
 package br.com.devlucas.tarefas.service;
 
+import br.com.devlucas.tarefas.dto.tarefa.AlocaPessoaTarefaDTO;
+import br.com.devlucas.tarefas.dto.tarefa.TarefaConcluidaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.dto.mapper.TarefaMapper;
 import br.com.devlucas.tarefas.model.Tarefa;
@@ -31,9 +33,16 @@ public class TarefaService {
         return tarefasSemPessoasPage.map(TarefaMapper::toDTO);
     }
 
-    public TarefaDTO finalizarTarefa(Long id) {
+    public TarefaConcluidaDTO finalizarTarefa(Long id) {
         var tarefa = tarefaRepository.getReferenceById(id);
         tarefaRepository.setFinalizarTarefaTrue(tarefa.getId());
-        return TarefaMapper.toDTO(tarefa);
+        return TarefaMapper.toTarefaConcluidaDTO(tarefa);
+    }
+
+    public AlocaPessoaTarefaDTO alocaPessoaNaTarefa(Long id, AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
+        var tarefa = tarefaRepository.findById(id).get();
+        if (tarefa == null) {
+
+        }
     }
 }

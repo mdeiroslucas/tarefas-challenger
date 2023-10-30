@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
+import br.com.devlucas.tarefas.dto.tarefa.TarefaConcluidaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.model.Departamento;
 import br.com.devlucas.tarefas.model.Pessoa;
@@ -42,5 +43,9 @@ public class TarefaMapper {
                 tarefa.getPessoa(),
                 tarefa.getFinalizado()
         );
+    }
+
+    public static TarefaConcluidaDTO toTarefaConcluidaDTO(Tarefa tarefa){
+        return new TarefaConcluidaDTO(tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getPrazo(), tarefa.getDepartamento().getTitulo(), tarefa.getPessoa().getNome(), tarefa.getFinalizado());
     }
 }
