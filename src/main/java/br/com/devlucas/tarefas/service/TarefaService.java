@@ -4,6 +4,7 @@ import br.com.devlucas.tarefas.dto.tarefa.AlocaPessoaTarefaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaConcluidaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.dto.mapper.TarefaMapper;
+import br.com.devlucas.tarefas.infra.exception.ValidacaoException;
 import br.com.devlucas.tarefas.model.Tarefa;
 import br.com.devlucas.tarefas.repository.DepartamentoRepository;
 import br.com.devlucas.tarefas.repository.PessoaRepository;
@@ -30,7 +31,7 @@ public class TarefaService {
     public Page<TarefaDTO> getTarefasSemPessoas(Pageable paginacao){
 
         Page<Tarefa> tarefasSemPessoasPage = tarefaRepository.findByPessoaIsNullOrderByPrazo(paginacao);
-        return tarefasSemPessoasPage.map(TarefaMapper::toDTO);
+        return tarefasSemPessoasPage.map(tarefaMapper::toDTO);
     }
 
     public TarefaConcluidaDTO finalizarTarefa(Long id) {
@@ -39,10 +40,24 @@ public class TarefaService {
         return TarefaMapper.toTarefaConcluidaDTO(tarefa);
     }
 
-    public AlocaPessoaTarefaDTO alocaPessoaNaTarefa(Long id, AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
-        var tarefa = tarefaRepository.findById(id).get();
-        if (tarefa == null) {
-
+    public TarefaDTO alocaPessoaNaTarefa(Long id, AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
+        if (!tarefaRepository.existsById(id)) {
+            throw new ValidacaoException("Id da tarefa informada não existe!");
         }
+
+        if (!pessoaRepository.existsById(alocaPessoaTarefaDTO.idPessoa())) {
+            throw new ValidacaoException("Id da pessoa informada não existe!");
+        }
+
+        var pessoa = pessoaRepository.findById(alocaPessoaTarefaDTO.idPessoa()).get();
+        var tarefa = tarefaRepository.findById(id).get();
+
+        if (pessoa.getDepartamento().getId() != tarefa.getDepartamento().getId()){
+            throw new ValidacaoException("O departamento da tarefa, não é o mesmo departamento da pessoa selecionada!");
+        }
+
+        tarefa.setPessoa(pessoa);
+
+        return tarefaMapper.toDTO(tarefaRepository.save(tarefa));
     }
 }

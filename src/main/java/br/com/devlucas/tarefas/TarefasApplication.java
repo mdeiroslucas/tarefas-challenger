@@ -47,7 +47,7 @@ public class TarefasApplication {
 			var departamentoDesenvolvimento = departamentoRepository.findById(3L).get();
 
 			//Pessoas
-			Pessoa pessoa = new Pessoa(null, "Camila", departamento);
+			Pessoa pessoa = new Pessoa(null, "Mariana", departamento);
 			Pessoa pessoa2 = new Pessoa(null, "Lucas", departamentoDesenvolvimento);
 			pessoaRepository.save(pessoa);
 			pessoaRepository.save(pessoa2);
@@ -55,7 +55,7 @@ public class TarefasApplication {
 			//Tarefas
 			Tarefa t1 = new Tarefa(null, "Tarefa 1", "Testando tarefa 1", LocalDate.parse("27/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamentoDesenvolvimento, 4, pessoa2, false);
 			Tarefa t2 = new Tarefa(null, "Tarefa 2", "Testando tarefa 2", LocalDate.parse("20/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamento, 5, pessoa, false);
-			Tarefa t3 = new Tarefa(null, "Tarefa 3", "Testando tarefa 3", LocalDate.parse("11/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamentoDesenvolvimento, 5, pessoa, false);			Tarefa t4 = new Tarefa(null, "Tarefa com prazo mais antigo", "Testando tarefa 4", LocalDate.parse("10/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamento, 5, null, false);
+			Tarefa t3 = new Tarefa(null, "Tarefa 3", "Testando tarefa 3", LocalDate.parse("11/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamentoDesenvolvimento, 20, pessoa, false);			Tarefa t4 = new Tarefa(null, "Tarefa com prazo mais antigo", "Testando tarefa 4", LocalDate.parse("10/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamento, 5, null, false);
 			Tarefa t5 = new Tarefa(null, "Tarefa com prazo mais antigo", "Testando tarefa 5", LocalDate.parse("11/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamentoDesenvolvimento, 5, null, false);
 			Tarefa t6 = new Tarefa(null, "Tarefa com prazo mais antigo", "Testando tarefa 6", LocalDate.parse("12/10/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), departamento, 5, null, false);
 

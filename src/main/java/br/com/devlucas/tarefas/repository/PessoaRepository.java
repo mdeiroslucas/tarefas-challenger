@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +17,13 @@ import java.util.List;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     List<Pessoa> findByNome(String nome);
+
+    @Query("SELECT AVG(t.duracao) FROM Tarefa t WHERE t.pessoa = :pessoa AND t.prazo >= :dataInicial AND t.prazo <= :dataFinal")
+    Double findMediaHorasGastasPorPessoaNoIntervalo(
+            @Param("pessoa") Pessoa pessoa,
+            @Param("dataInicial") LocalDate dataInicial,
+            @Param("dataFinal") LocalDate dataFinal
+    );
 
     Page<Pessoa> findAll(Pageable paginacao);
 

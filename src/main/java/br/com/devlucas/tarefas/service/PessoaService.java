@@ -14,9 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
+import br.com.devlucas.tarefas.model.Tarefa;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -33,12 +35,21 @@ public class PessoaService {
         return pessoaRepository.findAll(paginacao).map(ListagemPessoaDTO::new);
     }
 
-    public List<ListaPessoasEMediaDeHorasDTO> listarPessoasEMediaDeHorasGastaPorTarefa(){
-        return pessoaRepository.findAll().stream().map(ListaPessoasEMediaDeHorasDTO::new).toList();
-    }
+    public List<ListaPessoasEMediaDeHorasDTO> findMediaHorasGastasPorPessoaNoIntervalo(String nome, LocalDate dataInicial, LocalDate dataFinal) {
 
-    public List<ListaPessoasEMediaDeHorasDTO> buscarPessoaPorNome(@PathVariable String nome) {
-        return pessoaRepository.findByNome(nome).stream().map(ListaPessoasEMediaDeHorasDTO::new).toList();
+        return pessoaRepository.findByNome(nome).stream()
+                .map(pessoa ->
+                {
+                    double mediaHorasGastas = pessoa.getTarefas().stream()
+                            .filter(tarefa -> tarefa.getPrazo().isAfter(dataInicial) && tarefa.getPrazo().isBefore(dataFinal))
+                            .mapToInt(Tarefa::getDuracao)
+                            .average()
+                            .orElse(0.0);
+
+                    return new ListaPessoasEMediaDeHorasDTO(pessoa.getNome(), mediaHorasGastas);
+                }
+                )
+                .collect(Collectors.toList());
     }
 
     public PessoaDTO create(@Valid PessoaDTO pessoaDTO){

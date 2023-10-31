@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,8 +41,12 @@ public class PessoasController {
     }
 
     @GetMapping("/gastos")
-    public ResponseEntity<List<ListaPessoasEMediaDeHorasDTO>> listarPessoasEMediaDeHorasGastaPorTarefa() {
-        return ResponseEntity.ok(pessoaService.listarPessoasEMediaDeHorasGastaPorTarefa());
+    public ResponseEntity<List<ListaPessoasEMediaDeHorasDTO>> buscarPessoaPorNome(
+            @RequestParam String nome,
+            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataInicial,
+            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataFinal
+    ) {
+        return ResponseEntity.ok(pessoaService.findMediaHorasGastasPorPessoaNoIntervalo(nome, dataInicial, dataFinal));
     }
 
     @PostMapping

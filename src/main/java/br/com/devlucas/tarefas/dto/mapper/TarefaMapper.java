@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.dto.mapper;
 
+import br.com.devlucas.tarefas.dto.tarefa.AlocaPessoaTarefaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaConcluidaDTO;
 import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import br.com.devlucas.tarefas.model.Departamento;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TarefaMapper {
-    public static TarefaDTO toDTO (Tarefa tarefa){
+    public TarefaDTO toDTO (Tarefa tarefa){
         if (tarefa == null) {
             return null;
         }
@@ -47,5 +48,9 @@ public class TarefaMapper {
 
     public static TarefaConcluidaDTO toTarefaConcluidaDTO(Tarefa tarefa){
         return new TarefaConcluidaDTO(tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getPrazo(), tarefa.getDepartamento().getTitulo(), tarefa.getPessoa().getNome(), tarefa.getFinalizado());
+    }
+
+    public AlocaPessoaTarefaDTO alocaPessoaTarefaToDTO(Tarefa tarefa) {
+        return new AlocaPessoaTarefaDTO(tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getPrazo(), tarefa.getDepartamento().getId(), tarefa.getPessoa().getId());
     }
 }

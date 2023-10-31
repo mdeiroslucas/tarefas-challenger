@@ -38,7 +38,7 @@ public class TarefaController {
 
     @PutMapping("/alocar/{id}")
     @Transactional
-    public ResponseEntity<AlocaPessoaTarefaDTO> alocarPessoaNaTarefa(@PathVariable Long id, @Valid @RequestBody AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
+    public ResponseEntity<TarefaDTO> alocarPessoaNaTarefa(@PathVariable Long id, @Valid @RequestBody AlocaPessoaTarefaDTO alocaPessoaTarefaDTO) {
         return ResponseEntity.ok(tarefaService.alocaPessoaNaTarefa(id, alocaPessoaTarefaDTO));
     }
 }
