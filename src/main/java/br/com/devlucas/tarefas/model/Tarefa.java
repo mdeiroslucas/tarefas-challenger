@@ -1,5 +1,6 @@
 package br.com.devlucas.tarefas.model;
 
+import br.com.devlucas.tarefas.dto.tarefa.TarefaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -51,6 +52,16 @@ public class Tarefa {
         this.duracao = duracao;
         this.pessoa = pessoa;
         this.finalizado = finalizado;
+    }
+
+    public Tarefa (TarefaDTO tarefaDTO) {
+        this.titulo = tarefaDTO.titulo();
+        this.descricao = tarefaDTO.descricao();
+        this.prazo = tarefaDTO.prazo();
+        this.departamento = tarefaDTO.departamento();
+        this.duracao = tarefaDTO.duracao();
+        this.pessoa = tarefaDTO.pessoa();
+        this.finalizado = tarefaDTO.finalizado();
     }
 
     public Tarefa() {}
