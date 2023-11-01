@@ -34,12 +34,6 @@ public class PessoasController {
         return ResponseEntity.ok(pessoaService.listarPessoas());
     }
 
-    @GetMapping("/outras")
-    @ResponseStatus(HttpStatus.OK)
-    public Page<ListagemPessoaDTO> listarPessoasPorNome(@PageableDefault(size = 1) Pageable paginacao) {
-        return pessoaService.listarPessoasPorPaginacao(paginacao);
-    }
-
     @GetMapping("/gastos")
     public ResponseEntity<List<ListaPessoasEMediaDeHorasDTO>> buscarPessoaPorNome(
             @RequestParam String nome,
@@ -51,7 +45,7 @@ public class PessoasController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PessoaDTO> create(@RequestBody PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaDTO pessoaDTO, UriComponentsBuilder uriBuilder){
         var pessoa =  pessoaService.create(pessoaDTO);
         var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.id()).toUri();
 

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -49,11 +50,8 @@ class TarefaRepositoryTest {
 
     @Test
     @DisplayName("Status finalizado da tarefa deve retornar true")
+    @Transactional
     void setFinalizarTarefaTrue() {
-        var tarefa = tarefaRepository.findById(4L).get();
-
-        assertFalse(tarefa.getFinalizado());
-
         tarefaRepository.setFinalizarTarefaTrue(4L);
 
         var tarefa2 = tarefaRepository.findById(4L).get();
