@@ -5,5 +5,4 @@ public class RegistroNaoEncontrado extends RuntimeException{
     public RegistroNaoEncontrado(Long id){
         super("Registro não encontrado com id: " + id);
     }
-
 }
