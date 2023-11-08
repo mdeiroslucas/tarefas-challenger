@@ -69,8 +69,4 @@ public class PessoaService {
     public void delete (@NotNull @Positive Long id){
         pessoaRepository.delete(pessoaRepository.findById(id).orElseThrow(() -> new RegistroNaoEncontrado(id)));
     }
-
-//    public List<ListagemPessoaDTO> listaPessoasPorDepartamento(PessoaDTO pessoaDTO) {
-//        return pessoaRepository.countByDepartamento(pessoaDTO.departamento());
-//    }
 }

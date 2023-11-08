@@ -42,7 +42,6 @@ public class TarefasApplication {
 			departamentoRepository.save(d2);
 			departamentoRepository.save(d3);
 
-//			var departamento = departamentoRepository.getReferenceById(1L);
 			var departamento = departamentoRepository.findById(1L).get();
 			var departamentoDesenvolvimento = departamentoRepository.findById(3L).get();
 
